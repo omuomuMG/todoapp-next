@@ -1,5 +1,5 @@
 "use client";
-import { edit } from "@/api";
+import { deleteTodo, edit } from "@/api";
 import { Task } from "@/types";
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 
@@ -24,6 +24,9 @@ const Todo = ({ todo }: TodoProps) => {
 	const handleDecide = async (id: string) => {
 		setIsEdditing(false);
 		edit(id, newText);
+	};
+	const handleDelete = async (id: string) => {
+		deleteTodo(id);
 	};
 	return (
 		<li
@@ -55,7 +58,9 @@ const Todo = ({ todo }: TodoProps) => {
 						edit
 					</button>
 				)}
-				<button className="text-red-500">delete</button>
+				<button className="text-red-500" onClick={() => handleDelete(todo.id)}>
+					delete
+				</button>
 			</div>
 		</li>
 	);

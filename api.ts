@@ -25,3 +25,12 @@ export const edit = async (id: string, newText: string): Promise<Task[]> => {
 	const updatedTodo = res.json();
 	return updatedTodo;
 };
+
+export const deleteTodo = async (id: string): Promise<Task[]> => {
+	const res = await fetch(`http://localhost:3000/tasks/${id}`, {
+		method: "DELETE",
+		headers: { "Content-Type": "application/json" },
+	});
+	const updatedTodo = res.json();
+	return updatedTodo;
+};
