@@ -1,15 +1,18 @@
 "use client";
 import { addTodos } from "@/api";
+import { randomUUID } from "crypto";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 
 function AddTask() {
 	const [taskTitle, setTaskTitle] = useState("");
-	const [id, SetId] = useState<number>(5);
+	const [id, setId] = useState<string>(randomUUID);
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		await addTodos({ id: id.toString(), text: taskTitle });
-		setTaskTitle("");
-		SetId(id + 1);
+		if (taskTitle != "") {
+			await addTodos({ id: id, text: taskTitle });
+			setId(randomUUID.toString);
+			setTaskTitle("");
+		}
 	};
 	return (
 		<form className="mb-4 space-y-3" onSubmit={handleSubmit}>
