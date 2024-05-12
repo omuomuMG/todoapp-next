@@ -8,7 +8,8 @@ function AddTask() {
 	const [id, setId] = useState<string>(randomUUID);
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
-		if (taskTitle != "") {
+		if (taskTitle != "" && taskTitle.match(/\S/g)) {
+			//空文字、空白のみの文字を許さない
 			await addTodos({ id: id, text: taskTitle });
 			setId(randomUUID.toString);
 			setTaskTitle("");
